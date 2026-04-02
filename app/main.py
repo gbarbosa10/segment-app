@@ -10,6 +10,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image
+from torchvision.models.segmentation import fcn_resnet50
 
 APP_ROOT = Path(__file__).resolve().parent.parent
 STATIC_DIR = APP_ROOT / "static"
@@ -20,7 +21,9 @@ class FCN(nn.Module):
     def __init__(self):
         super(FCN, self).__init__()
 
-        self.backbone = torch.hub.load('pytorch/vision:v0.10.0', 'fcn_resnet50', pretrained=True).backbone
+        # Avoid loading an old torchvision release through torch.hub; it is
+        # incompatible with modern torch/onnx internals.
+        self.backbone = fcn_resnet50(weights=None, weights_backbone=None).backbone
 
         dec0conv1 = nn.Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
         dec0norm1 = nn.BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
