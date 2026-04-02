@@ -1,0 +1,1 @@
+app/FCN_best_train_dice.ckpt filter=lfs diff=lfs merge=lfs -text

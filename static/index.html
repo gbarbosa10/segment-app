@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Segmentation Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Image Segmentation Demo</h1>
+        <p class="subtitle">
+          Upload an image and run the backup PyTorch model to generate a segmentation mask.
+        </p>
+      </header>
+
+      <section class="panel">
+        <label class="file-input">
+          <input id="fileInput" type="file" accept="image/*" />
+          <span>Select Image</span>
+        </label>
+        <button id="runBtn" class="primary" disabled>Run Segmentation</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+        <span id="status" class="status">No image selected.</span>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Original</h2>
+          <div class="image-frame">
+            <img id="originalImg" alt="Original image preview" />
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Segmentation Overlay</h2>
+          <div class="image-frame">
+            <img id="overlayImg" alt="Segmentation overlay" />
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Mask</h2>
+          <div class="image-frame">
+            <img id="maskImg" alt="Segmentation mask" />
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
