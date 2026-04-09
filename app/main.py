@@ -94,7 +94,7 @@ def image_to_data_url(image: Image.Image) -> str:
 model = load_model()
 
 
-@app.post("/api/segment")
+@application.post("/api/segment")
 async def segment_image(file: UploadFile = File(...)):
     if not file.content_type or not file.content_type.startswith("image/"):
         return JSONResponse({"error": "Please upload an image file."}, status_code=400)
@@ -105,7 +105,7 @@ async def segment_image(file: UploadFile = File(...)):
     except Exception:
         return JSONResponse({"error": "Unable to read image."}, status_code=400)
 
-    resized, tensor = preprocess_image(image, size= 224)
+    resized, tensor = preprocess_image(image, size=224)
 
     with torch.no_grad():
         logits = model(tensor)
