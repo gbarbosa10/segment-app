@@ -60,7 +60,7 @@ runBtn.addEventListener("click", async () => {
       body: data,
     });
 
-    const payload = await response.json();
+
     const contentType = response.headers.get("content-type") || "";
     const payload = contentType.includes("application/json")
        ? await response.json()
